@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import AWS from 'aws-sdk';
+import AWS from "aws-sdk";
 
 export const VideoComponent = () => {
   let width = (window.innerWidth / 3) * 2; //get the window width
@@ -27,7 +27,7 @@ export const VideoComponent = () => {
       "canplay",
       (ev) => {
         if (!streaming) {
-          width = window.innerWidth/2; //get window width
+          width = window.innerWidth / 2; //get window width
           height = video.videoHeight / (video.videoWidth / width);
           video.setAttribute("width", width);
           video.setAttribute("height", height);
@@ -78,19 +78,21 @@ export const VideoComponent = () => {
       canvas.width = width;
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
-      
+
       const data = canvas.toDataURL("image/png");
-      let bin = atob(data.replace(/^.*,/, '')); // (1)ファイルをバイナリ化
+      let bin = atob(data.replace(/^.*,/, "")); // (1)ファイルをバイナリ化
       let buffer = new Uint8Array(bin.length); // (2)バイナリデータに変換する
       for (let i = 0; i < bin.length; i++) {
-          buffer[i] = bin.charCodeAt(i);
-      } 
+        buffer[i] = bin.charCodeAt(i);
+      }
       // (3)Fileオブジェクトを生成
-      let image_file = new File([buffer.buffer], randomFileName(), {type: 'image/png'});
+      let image_file = new File([buffer.buffer], randomFileName(), {
+        type: "image/png",
+      });
       addPhoto(image_file);
 
-      console.log(data)
-      photo.setAttribute("src", data);
+      console.log(data);
+      // photo.setAttribute("src", data);
       document.getElementById("canvas").style.display = "none";
     } else {
       clearPhoto();
@@ -105,34 +107,34 @@ export const VideoComponent = () => {
     AWS.config.update({
       region: bucketRegion,
       credentials: new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: IdentityPoolId
-      })
+        IdentityPoolId: IdentityPoolId,
+      }),
     });
 
     var s3 = new AWS.S3({
       apiVersion: "2006-03-01",
-      params: { Bucket: albumBucketName }
+      params: { Bucket: albumBucketName },
     });
     var fileName = file.name;
-    var albumPhotosKey = encodeURIComponent('GroupPicture') + "/";
-  
+    var albumPhotosKey = encodeURIComponent("GroupPicture") + "/";
+
     var photoKey = albumPhotosKey + fileName;
-  
+
     // Use S3 ManagedUpload class as it supports multipart uploads
     var upload = new AWS.S3.ManagedUpload({
       params: {
         Bucket: albumBucketName,
         Key: photoKey,
-        Body: file
-      }
+        Body: file,
+      },
     });
     var promise = upload.promise();
     promise.then(
-      function(data) {
+      function (data) {
         alert("Successfully uploaded photo.");
         console.log(data);
       },
-      function(err) {
+      function (err) {
         return alert("There was an error uploading your photo: ", err.message);
       }
     );
@@ -141,7 +143,6 @@ export const VideoComponent = () => {
   function randomFileName() {
     return Math.random().toString(32).substring(2);
   }
-  
 
   function isSmartPhone() {
     if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
@@ -154,10 +155,10 @@ export const VideoComponent = () => {
   function clearPhoto() {
     if (canvas) {
       const context = canvas.getContext("2d");
-      context.fillStyle = "#AAA";
+      context.fillStyle = "#fff";
       context.fillRect(0, 0, canvas.width, canvas.height);
       const data = canvas.toDataURL("image/png");
-      photo.setAttribute("src", data);
+      // photo.setAttribute("src", data);
     }
   }
 
@@ -173,14 +174,17 @@ export const VideoComponent = () => {
         <div>
           <button
             type="button"
-            className="btn btn-outline-primary btn-lg"
+            className="custom-btn btn-5 btn-lg"
             onClick={cameraOn}
           >
             Camera On
           </button>
+
+          <span style={{ margin: "0 20px" }}></span>
+
           <button
             type="button"
-            className="btn btn-outline-primary btn-lg"
+            className="btn btn-1"
             onClick={takePicture}
             Take
             picture
