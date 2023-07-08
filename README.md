@@ -1,5 +1,5 @@
 # KDDIHacks2023-TeamF
 
-git clone
-npm start
-localhost:3000
+### git clone
+### npm start
+### localhost:3000
