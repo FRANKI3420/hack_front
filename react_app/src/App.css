@@ -53,3 +53,7 @@
     flex-basis: 100%;
   }
 }
+
+#photo {
+  display: none;
+}
