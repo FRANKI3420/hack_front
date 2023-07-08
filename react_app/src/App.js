@@ -15,6 +15,7 @@ function App() {
         <img id="photo" alt="The screen caputure will appear in this box." />
       </div>
       <VideoComponent />
+      <Greet />
     </div>
   );
 }
