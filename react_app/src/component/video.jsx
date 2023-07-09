@@ -146,7 +146,7 @@ export const VideoComponent = () => {
   }
 
   function randomFileName() {
-    return Math.random().toString(32).substring(2)+'.jpg';
+    return Math.random().toString(32).substring(2) + ".jpg";
   }
 
   function isSmartPhone() {
@@ -170,16 +170,8 @@ export const VideoComponent = () => {
     <>
       <div className="d-flex p-2 justify-content-around align-items-center">
         <div>
-
           <span style={{ margin: "0 20px" }}></span>
-
-          <button
-            type="button"
-            className="btn btn-1"
-            onClick={takePicture}
-            Take
-            picture
-          >
+          <button type="button" className="btn btn-1" onClick={takePicture}>
             Upload Picture
           </button>
         </div>
