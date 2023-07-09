@@ -7,19 +7,21 @@ export const VideoComponent = () => {
   let streaming = false; //streaming reference
   let video = null; //video reference
   let canvas = null; //canvas referance
-  let photo = null; //photo referance
+  let photo1 = null; //photo referance
+  let photo2 = null;
   let device = null;
 
   useEffect(() => {
     video = document.getElementById("video");
     canvas = document.getElementById("canvas");
-    photo = document.getElementById("photo");
+    photo1 = document.getElementById("photo1");
+    photo2 = document.getElementById("photo2");
     device = document.getElementById("device");
     console.log(video);
     if (isSmartPhone()) {
-      device.innerText = "Smart Phone";
+      //device.innerText = "Smart Phone";
     } else {
-      device.innerText = "PC";
+      //device.innerText = "PC";
     }
 
     //this event is fired when the video can ready to stream.(a.k.a: video can play)
@@ -41,6 +43,7 @@ export const VideoComponent = () => {
 
     //this event is fired when the file uploaded.(a.k.a: file change)
     clearPhoto();
+    cameraOn();
   });
 
   async function cameraOn() {
@@ -89,7 +92,9 @@ export const VideoComponent = () => {
       let image_file = new File([buffer.buffer], randomFileName(), {
         type: "image/png",
       });
-      addPhoto(image_file);
+      //addPhoto(image_file);
+      photo1.setAttribute("src", data);
+      photo2.setAttribute("src", data);
 
       console.log(data);
       // photo.setAttribute("src", data);
@@ -141,7 +146,7 @@ export const VideoComponent = () => {
   }
 
   function randomFileName() {
-    return Math.random().toString(32).substring(2);
+    return Math.random().toString(32).substring(2)+'.jpg';
   }
 
   function isSmartPhone() {
@@ -158,27 +163,13 @@ export const VideoComponent = () => {
       context.fillStyle = "#fff";
       context.fillRect(0, 0, canvas.width, canvas.height);
       const data = canvas.toDataURL("image/png");
-      // photo.setAttribute("src", data);
     }
   }
 
   return (
     <>
-      <h2
-        className="alert alert-info my-3 container-fluid text-center"
-        role="alert"
-      >
-        Camera Test
-      </h2>
       <div className="d-flex p-2 justify-content-around align-items-center">
         <div>
-          <button
-            type="button"
-            className="custom-btn btn-5 btn-lg"
-            onClick={cameraOn}
-          >
-            Camera On
-          </button>
 
           <span style={{ margin: "0 20px" }}></span>
 
@@ -191,9 +182,6 @@ export const VideoComponent = () => {
           >
             Upload Picture
           </button>
-          <div className="my-2">
-            state：<span id="status"></span>---device：<span id="device"></span>
-          </div>
         </div>
       </div>
     </>

@@ -11,10 +11,14 @@ function App() {
         <div>
           <video id="video" autoPlay muted playsInline></video>
         </div>
-
-        <div>
-          <img id="photo" alt="The screen caputure will appear in this box." />
-        </div>
+        <table border={2}>
+          <tr>
+            <img id="photo1" class="photo"/>
+          </tr>
+          <tr>
+            <img id="photo2" class="photo"/>
+          </tr>
+        </table>
         {/* <PictureComponent /> */}
       </div>
       <VideoComponent />

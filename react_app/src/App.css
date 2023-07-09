@@ -40,6 +40,7 @@
 #picture {
   display: flex;
   flex-wrap: wrap;
+  flex-flow: row;
 }
 
 #picture > div {
@@ -57,3 +58,17 @@
 #photo {
   display: none;
 }
+
+table {
+  margin: 10px;
+  
+}
+
+tr {
+  
+}
+
+.photo {
+  width: 50%;
+}
+
