@@ -8,22 +8,18 @@ function App() {
   return (
     <div className="App">
       <div id="picture">
-        <div>
-          <video id="video" autoPlay muted playsInline></video>
+        <div className="block1">
+          <div>
+            <video id="video" autoPlay muted playsInline></video>
+          </div>
+          <div>
+            <canvas id="canvas"></canvas>
+          </div>
+          <VideoComponent />
         </div>
-        <table border={2}>
-          <tr>
-            <img id="photo1" class="photo"/>
-          </tr>
-          <tr>
-            <img id="photo2" class="photo"/>
-          </tr>
-        </table>
-        {/* <PictureComponent /> */}
-      </div>
-      <VideoComponent />
-      <div>
-        <canvas id="canvas"></canvas>
+        <div className="block2">
+          <PictureComponent />
+        </div>
       </div>
     </div>
   );

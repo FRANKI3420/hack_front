@@ -9,6 +9,7 @@ export const PictureComponent = () => {
 
   return (
     <>
+      <h3>Look</h3>
       <div>
         <img id="cropped_img" alt="kari1" src={cropped_src} />
       </div>
