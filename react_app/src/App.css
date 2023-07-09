@@ -36,3 +36,39 @@
     transform: rotate(360deg);
   }
 }
+
+#picture {
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: row;
+}
+
+#picture > div {
+  flex: 1 50%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  #picture > div {
+    flex-basis: 100%;
+  }
+}
+
+#photo {
+  display: none;
+}
+
+table {
+  margin: 10px;
+  
+}
+
+tr {
+  
+}
+
+.photo {
+  width: 50%;
+}
+
