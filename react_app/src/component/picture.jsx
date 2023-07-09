@@ -90,7 +90,7 @@ export const PictureComponent = () => {
         </div>
       </div>
       <div className="gptText-area">{comment}</div>
-      <button onClick={handleClick}>再取得</button>
+      <button className="btn btn-1"　onClick={handleClick}>再取得</button>
     </>
   );
 };
