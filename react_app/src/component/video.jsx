@@ -17,7 +17,6 @@ export const VideoComponent = () => {
     photo1 = document.getElementById("photo1");
     photo2 = document.getElementById("photo2");
     device = document.getElementById("device");
-    console.log(video);
     if (isSmartPhone()) {
       //device.innerText = "Smart Phone";
     } else {
@@ -81,8 +80,9 @@ export const VideoComponent = () => {
       canvas.width = width;
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
-
+      console.log("c", canvas);
       const data = canvas.toDataURL("image/png");
+
       let bin = atob(data.replace(/^.*,/, "")); // (1)ファイルをバイナリ化
       let buffer = new Uint8Array(bin.length); // (2)バイナリデータに変換する
       for (let i = 0; i < bin.length; i++) {
@@ -164,6 +164,44 @@ export const VideoComponent = () => {
       context.fillRect(0, 0, canvas.width, canvas.height);
       const data = canvas.toDataURL("image/png");
     }
+  }
+
+  async function uploadFile(file) {
+    const albumBucketName = "face-image-teamf";
+    const bucketRegion = "ap-northeast-1";
+    const IdentityPoolId =
+      "ap-northeast-1:27df68ca-3e55-4ff2-8ad5-01216bfbb9c6";
+
+    AWS.config.update({
+      region: bucketRegion,
+      credentials: new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: IdentityPoolId,
+      }),
+    });
+
+    var fileName = file.name;
+    var albumPhotosKey = encodeURIComponent("faceImage") + "/";
+
+    var photoKey = albumPhotosKey + fileName;
+
+    var upload = new AWS.S3.ManagedUpload({
+      params: {
+        Bucket: albumBucketName,
+        Key: photoKey,
+        Body: file,
+      },
+    });
+
+    var promise = upload.promise();
+
+    promise.then(
+      function (data) {
+        alert("Successfully uploaded photo.");
+      },
+      function (err) {
+        return alert("There was an error uploading your photo: ", err.message);
+      }
+    );
   }
 
   return (
