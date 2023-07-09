@@ -85,7 +85,7 @@ export const VideoComponent = (props) => {
         buffer[i] = bin.charCodeAt(i);
       }
       // (3)Fileオブジェクトを生成
-      let image_file = new File([buffer.buffer], randomFileName(), {
+      let image_file = new File([buffer.buffer], "hack_test.png", {
         type: "image/png",
       });
       addPhoto(image_file);
@@ -115,7 +115,7 @@ export const VideoComponent = (props) => {
       params: { Bucket: albumBucketName },
     });
     var fileName = file.name;
-    var albumPhotosKey = encodeURIComponent("GroupPicture") + "/";
+    var albumPhotosKey = encodeURIComponent("");
 
     var photoKey = albumPhotosKey + fileName;
 

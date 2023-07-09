@@ -1,12 +1,11 @@
 import { React, useState, useEffect } from "react";
 import "./App.css";
 import "./Button.css";
-import { Greet } from "./component/sample";
 import { VideoComponent } from "./component/video";
 import { PictureComponent } from "./component/picture";
 
 function App() {
-  const [isView, setIsView] = useState(true);
+  const [isView, setIsView] = useState(false);
 
   return (
     <div className="App">

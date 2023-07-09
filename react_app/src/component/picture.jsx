@@ -1,26 +1,73 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../style/picture.css";
+import AWS from "aws-sdk";
 
 export const PictureComponent = () => {
-  let crop = document.getElementById("cropped_img");
-  let target = document.getElementById("target_img");
+  console.log("pic");
+  var albumBucketName = "kokushimusou";
+  var bucketRegion = "ap-northeast-1";
+  var IdentityPoolId = "ap-northeast-1:27df68ca-3e55-4ff2-8ad5-01216bfbb9c6";
 
-  const cropped_src =
-    "https://dosbg3xlm0x1t.cloudfront.net/images/items/9784088825274/1200/9784088825274.jpg";
-  const target_img_scr =
-    "https://cdn-ak-img.shonenjumpplus.com/public/series-thumbnail/10834108156650024830-239012e525e9a5d948ac9faa08335c8e?1688674167";
+  AWS.config.region = bucketRegion; // Region
+  AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: IdentityPoolId,
+  });
+
+  var s3 = new AWS.S3();
+
+  // 画像データを取り込む関数
+  function fetchImageFromS3_1(bucketName, imageName) {
+    const params = {
+      Bucket: bucketName,
+      Key: imageName,
+    };
+
+    s3.getObject(params, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        // ここで取得した画像データを処理します
+        const imageData = data.Body;
+        const uint8Array = new Uint8Array(imageData);
+        const binary = String.fromCharCode.apply(null, uint8Array);
+        const base64 = btoa(binary);
+        const dataURL = `data:image/jpeg;base64,${base64}`;
+        console.log("data", dataURL);
+        if (imageName === "similar.png") {
+          const imgElement = document.getElementById("target_img");
+          if (imgElement) {
+            imgElement.src = dataURL;
+          }
+        } else if (imageName === "cropped.png") {
+          const imgElement = document.getElementById("cropped_img");
+          if (imgElement) {
+            imgElement.src = dataURL;
+          }
+        }
+      }
+    });
+  }
+
+  // 画像データの取得を実行する
+  fetchImageFromS3_1(albumBucketName, "similar.png");
+  fetchImageFromS3_1(albumBucketName, "cropped.png");
 
   return (
     <>
-      <h2>Look Aliles !!</h2>
+      <h2>Look Alikes !!</h2>
+      <div className="name-area">
+        <div id="cropped_name">切り取った顔</div>
+        <div id="target_name">名前</div>
+      </div>
       <div className="img-area">
         <div>
-          <img id="cropped_img" alt="kari1" src={cropped_src} />
+          <img id="cropped_img" alt="kari1" />
         </div>
         <div>
-          <img id="target_img" alt="kari2" src={target_img_scr} />
+          <img id="target_img" alt="kari2" />
         </div>
       </div>
+      <div className="gptText-area">あいうえお</div>
     </>
   );
 };

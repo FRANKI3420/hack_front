@@ -1,4 +1,20 @@
 @media (min-width: 768px) {
+  .name-area {
+    display: flex;
+    gap: 250px;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .img-area {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  .gptText-area {
+    background-color: white;
+    margin-top: 50px;
+    height: 50px;
+  }
   #cropped_img {
     width: 300px;
     height: 300px;
@@ -7,10 +23,5 @@
   #target_img {
     width: 300px;
     height: 300px;
-  }
-  .img-area {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
   }
 }
