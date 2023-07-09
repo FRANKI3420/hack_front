@@ -76,7 +76,6 @@ export const VideoComponent = (props) => {
       canvas.width = width;
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
-      console.log("c", canvas);
       const data = canvas.toDataURL("image/png");
 
       let bin = atob(data.replace(/^.*,/, "")); // (1)ファイルをバイナリ化
@@ -131,7 +130,6 @@ export const VideoComponent = (props) => {
     promise.then(
       function (data) {
         alert("Successfully uploaded photo.");
-        console.log(data);
         props.setIsView(true);
       },
       function (err) {
