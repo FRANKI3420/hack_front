@@ -1,10 +1,12 @@
+import { React, useState, useEffect } from "react";
 import "./App.css";
 import "./Button.css";
-import { Greet } from "./component/sample";
 import { VideoComponent } from "./component/video";
 import { PictureComponent } from "./component/picture";
 
 function App() {
+  const [isView, setIsView] = useState(false);
+
   return (
     <div className="App">
       <div id="picture">
@@ -15,11 +17,13 @@ function App() {
           <div>
             <canvas id="canvas"></canvas>
           </div>
-          <VideoComponent />
+          <VideoComponent setIsView={setIsView} />
         </div>
-        <div className="block2">
-          <PictureComponent />
-        </div>
+        {isView && (
+          <div className="block2">
+            <PictureComponent />
+          </div>
+        )}
       </div>
     </div>
   );

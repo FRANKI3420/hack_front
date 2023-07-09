@@ -36,6 +36,17 @@
     transform: rotate(360deg);
   }
 }
+.block2 {
+  display: flex;
+  flex-direction: column;
+  background-color: #ebebeb;
+  margin: 20px;
+}
+
+#video {
+  width: 600px;
+  max-height: 500px;
+}
 
 #picture {
   display: flex;
@@ -47,6 +58,10 @@
   flex: 1 50%;
   box-sizing: border-box;
   padding: 10px;
+}
+
+#canvas {
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -61,14 +76,11 @@
 
 table {
   margin: 10px;
-  
 }
 
 tr {
-  
 }
 
 .photo {
   width: 50%;
 }
-
