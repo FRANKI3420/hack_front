@@ -88,8 +88,6 @@ export const VideoComponent = (props) => {
         type: "image/png",
       });
       addPhoto(image_file);
-
-      console.log(data);
       // photo.setAttribute("src", data);
       document.getElementById("canvas").style.display = "none";
     } else {

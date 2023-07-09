@@ -43,7 +43,6 @@ export const PictureComponent = () => {
           imgElement.src = dataURL;
         }
       }
-      console.log("picData", dataURL);
     } catch (err) {
       console.log(err);
     }
@@ -56,7 +55,7 @@ export const PictureComponent = () => {
   }
 
   async function fetchLamda(url) {
-    fetch(url)
+    await fetch(url)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -68,11 +67,11 @@ export const PictureComponent = () => {
       });
   }
 
-  function handleClick() {
-    fetchLamda(
+  async function handleClick() {
+    await fetchLamda(
       "https://ld4kxdbkm4gtsohvxhvdszjihy0layeu.lambda-url.ap-northeast-1.on.aws/"
     );
-    fetchData();
+    await fetchData();
   }
 
   return (
