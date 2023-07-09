@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "../style/picture.css";
 import AWS from "aws-sdk";
 
 export const PictureComponent = () => {
   console.log("pic");
+  const [name, setName] = useState("");
+  const [comment, setComment] = useState("");
   const albumBucketName = "kokushimusou";
   const bucketRegion = "ap-northeast-1";
   const IdentityPoolId = "ap-northeast-1:27df68ca-3e55-4ff2-8ad5-01216bfbb9c6";
@@ -28,22 +30,20 @@ export const PictureComponent = () => {
       const binary = String.fromCharCode.apply(null, uint8Array);
       const base64 = btoa(binary);
       const dataURL = `data:image/png;base64,${base64}`;
-      console.log("data", dataURL);
       if (imageName === "similar.png") {
         const imgElement = document.getElementById("target_img");
         if (imgElement) {
-          console.log("1", dataURL);
           imgElement.src = "";
           imgElement.src = dataURL;
         }
       } else if (imageName === "cropped.png") {
         const imgElement = document.getElementById("cropped_img");
         if (imgElement) {
-          console.log("2", dataURL);
           imgElement.src = "";
           imgElement.src = dataURL;
         }
       }
+      console.log("picData", dataURL);
     } catch (err) {
       console.log(err);
     }
@@ -55,10 +55,23 @@ export const PictureComponent = () => {
     await fetchImageFromS3(albumBucketName, "similar.png");
   }
 
-  // 初回の画像データ取得
-  fetchData();
+  async function fetchLamda(url) {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setName(data.name);
+        setComment(data.conment);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   function handleClick() {
+    fetchLamda(
+      "https://ld4kxdbkm4gtsohvxhvdszjihy0layeu.lambda-url.ap-northeast-1.on.aws/"
+    );
     fetchData();
   }
 
@@ -67,7 +80,7 @@ export const PictureComponent = () => {
       <h2>Look Alikes !!</h2>
       <div className="name-area">
         <div id="cropped_name">切り取った顔</div>
-        <div id="target_name">名前</div>
+        <div id="target_name">{name}</div>
       </div>
       <div className="img-area">
         <div>
@@ -77,7 +90,7 @@ export const PictureComponent = () => {
           <img id="target_img" alt="kari2" />
         </div>
       </div>
-      <div className="gptText-area">あいうえお</div>
+      <div className="gptText-area">{comment}</div>
       <button onClick={handleClick}>再取得</button>
     </>
   );
