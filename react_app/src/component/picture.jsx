@@ -51,6 +51,12 @@ export const PictureComponent = () => {
   // 画像データの取得を実行する
 
   function handleClick() {
+    const imgElement1 = document.getElementById("target_img");
+    const imgElement2 = document.getElementById("cropped_img");
+    if (imgElement1 && imgElement2) {
+      imgElement1.src = "";
+      imgElement2.src = "";
+    }
     fetchImageFromS3_1(albumBucketName, "similar.png");
     fetchImageFromS3_1(albumBucketName, "cropped.png");
   }
