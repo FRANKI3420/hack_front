@@ -49,9 +49,11 @@ export const PictureComponent = () => {
   }
 
   // 画像データの取得を実行する
-  fetchImageFromS3_1(albumBucketName, "similar.png");
-  fetchImageFromS3_1(albumBucketName, "cropped.png");
 
+  function handleClick() {
+    fetchImageFromS3_1(albumBucketName, "similar.png");
+    fetchImageFromS3_1(albumBucketName, "cropped.png");
+  }
   return (
     <>
       <h2>Look Alikes !!</h2>
@@ -68,6 +70,9 @@ export const PictureComponent = () => {
         </div>
       </div>
       <div className="gptText-area">あいうえお</div>
+      <div className="updata-area">
+        <button onClick={handleClick}>更新</button>
+      </div>
     </>
   );
 };
