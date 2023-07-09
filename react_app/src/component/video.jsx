@@ -1,21 +1,17 @@
 import { React, useState, useEffect } from "react";
 import AWS from "aws-sdk";
 
-export const VideoComponent = () => {
+export const VideoComponent = (props) => {
   let width = (window.innerWidth / 3) * 2; //get the window width
   let height = 0; //this will be computed based on the input stream
   let streaming = false; //streaming reference
   let video = null; //video reference
   let canvas = null; //canvas referance
-  let photo1 = null; //photo referance
-  let photo2 = null;
   let device = null;
 
   useEffect(() => {
     video = document.getElementById("video");
     canvas = document.getElementById("canvas");
-    photo1 = document.getElementById("photo1");
-    photo2 = document.getElementById("photo2");
     device = document.getElementById("device");
     if (isSmartPhone()) {
       //device.innerText = "Smart Phone";
@@ -92,9 +88,7 @@ export const VideoComponent = () => {
       let image_file = new File([buffer.buffer], randomFileName(), {
         type: "image/png",
       });
-      //addPhoto(image_file);
-      photo1.setAttribute("src", data);
-      photo2.setAttribute("src", data);
+      addPhoto(image_file);
 
       console.log(data);
       // photo.setAttribute("src", data);
@@ -138,6 +132,7 @@ export const VideoComponent = () => {
       function (data) {
         alert("Successfully uploaded photo.");
         console.log(data);
+        props.setIsView(true);
       },
       function (err) {
         return alert("There was an error uploading your photo: ", err.message);
