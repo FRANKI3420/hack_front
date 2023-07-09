@@ -36,6 +36,14 @@
     transform: rotate(360deg);
   }
 }
+.block2 {
+  display: flex;
+  flex-direction: column;
+}
+
+#video {
+  width: 600px;
+}
 
 #picture {
   display: flex;
@@ -61,14 +69,11 @@
 
 table {
   margin: 10px;
-  
 }
 
 tr {
-  
 }
 
 .photo {
   width: 50%;
 }
-

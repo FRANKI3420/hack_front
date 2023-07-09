@@ -6,7 +6,7 @@ import { VideoComponent } from "./component/video";
 import { PictureComponent } from "./component/picture";
 
 function App() {
-  const [isView, setIsView] = useState(false);
+  const [isView, setIsView] = useState(true);
 
   return (
     <div className="App">

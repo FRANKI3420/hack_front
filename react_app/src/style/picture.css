@@ -1,0 +1,16 @@
+@media (min-width: 768px) {
+  #cropped_img {
+    width: 300px;
+    height: 300px;
+  }
+
+  #target_img {
+    width: 300px;
+    height: 300px;
+  }
+  .img-area {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+}
