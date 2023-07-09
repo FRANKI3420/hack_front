@@ -6,9 +6,9 @@ export const PictureComponent = () => {
   console.log("pic");
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
-  const albumBucketName = "kokushimusou";
-  const bucketRegion = "ap-northeast-1";
-  const IdentityPoolId = "ap-northeast-1:27df68ca-3e55-4ff2-8ad5-01216bfbb9c6";
+  const albumBucketName = "";
+  const bucketRegion = "";
+  const IdentityPoolId = "";
 
   AWS.config.region = bucketRegion; // Region
   AWS.config.credentials = new AWS.CognitoIdentityCredentials({
@@ -68,9 +68,7 @@ export const PictureComponent = () => {
   }
 
   async function handleClick() {
-    await fetchLamda(
-      "https://ld4kxdbkm4gtsohvxhvdszjihy0layeu.lambda-url.ap-northeast-1.on.aws/"
-    );
+    await fetchLamda("");
     await fetchData();
   }
 

@@ -96,9 +96,9 @@ export const VideoComponent = (props) => {
   }
 
   function addPhoto(file) {
-    var albumBucketName = "kokushimusou";
-    var bucketRegion = "ap-northeast-1";
-    var IdentityPoolId = "ap-northeast-1:27df68ca-3e55-4ff2-8ad5-01216bfbb9c6";
+    var albumBucketName = "";
+    var bucketRegion = "";
+    var IdentityPoolId = "";
 
     AWS.config.update({
       region: bucketRegion,
