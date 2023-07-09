@@ -11,7 +11,8 @@ function App() {
     <div className="App">
       <div id="picture">
         <div className="block1">
-          <div>
+        <h2 class="heading07" data-en="Find a Celebrity 1 ??"></h2>
+          <div id="videoDiv">
             <video id="video" autoPlay muted playsInline></video>
           </div>
           <div>
@@ -20,7 +21,7 @@ function App() {
           <VideoComponent setIsView={setIsView} />
         </div>
         {isView && (
-          <div className="block2">
+          <div className="block2  change-time05 box fadeUp">
             <PictureComponent />
           </div>
         )}
